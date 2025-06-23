@@ -22,13 +22,15 @@ spec:
     spec:
       containers:
         - name: widget-api
-          image: marcin888/fastapi:v2
-          imagePullPolicy: Always
+          image: marcin888/fastapi:v9
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
           env:
             - name: MONGODB_URI
               value: mongodb://mongodb:27017
+            - name: REDIS_URI
+              value: redis://redis:6379/0
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
