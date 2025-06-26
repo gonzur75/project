@@ -5,7 +5,7 @@ alertmanager:
       smtp_smarthost: 'smtp.gmail.com:587'
       smtp_from: 'alertmanager@azeno.com'
       smtp_auth_username: 'mail@gmail.com'
-      smtp_auth_password: 'topsecret123'
+#      smtp_auth_password:
 #      slack_api_url: 'https://hooks.slack.com/sources/'
     templates:
       - '/etc/alertmanager/config/*.tmpl'
