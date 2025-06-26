@@ -6,7 +6,7 @@ metadata:
   labels:
     app: widget-api
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: widget-api
@@ -22,37 +22,24 @@ spec:
     spec:
       containers:
         - name: widget-api
-          image: marcin888/fastapi:v9
+          image: fastapi:v18
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
           env:
-            - name: MONGODB_URI
+            - name: MONGO_URI
               value: mongodb://mongodb:27017
             - name: REDIS_URI
-              value: redis://redis:6379/0
+              value: redis://redis
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: widget-api-secrets
                   key: secret-key
-
           resources:
             requests:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 100m
+              memory: 256Mi
             limits:
               cpu: 500m
               memory: 512Mi
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 80
-            initialDelaySeconds: 15
-            periodSeconds: 20
